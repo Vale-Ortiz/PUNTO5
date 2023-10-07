@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#resultado {
+    font-weight: bold;
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de IMC</h1>
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ingrese su peso">
+        <br>
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" placeholder="Ingrese su altura">
+        <br>
+        <button onclick="calcularIMC()">Calcular IMC</button>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularIMC() {
+            var peso = parseFloat(document.getElementById("peso").value);
+            var altura = parseFloat(document.getElementById("altura").value);
+
+            if (!isNaN(peso) && !isNaN(altura) && altura > 0) {
+                var imc = peso / (altura * altura);
+                var mensaje = "Su IMC es: " + imc.toFixed(2);
+
+                if (imc < 18.5) {
+                    mensaje += " (Bajo peso)";
+                } else if (imc >= 18.5 && imc < 24.9) {
+                    mensaje += " (Peso normal)";
+                } else if (imc >= 25 && imc < 29.9) {
+                    mensaje += " (Sobrepeso)";
+                } else {
+                    mensaje += " (Obesidad)";
+                }
+
+                document.getElementById("resultado").textContent = mensaje;
+            } else {
+                alert("Por favor, ingrese un peso y una altura válidos.");
+            }
+        }
+    </script>
+</body>
+</html>
